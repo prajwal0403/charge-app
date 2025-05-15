@@ -1,25 +1,32 @@
 require('dotenv').config();
-PORT=5000
-DB_USER="postgres"
-DB_PASSWORD="Prajwal@0403"
-DB_NAME="postgres"
-DB_HOST="db.waauwzazgebvrxwefidt.supabase.co"
-JWT_SECRET="asdasdasdasd"
+
 module.exports = {
   development: {
-    username: "postgres",
-    password: "Prajwal@0403",
-    database: "postgres",
-    host: "db.waauwzazgebvrxwefidt.supabase.co",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
     port: process.env.DB_PORT || 5432,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // For Supabase / cloud Postgres
+      }
+    }
   },
   production: {
-    username: "postgres",
-    password: "Prajwal@0403",
-    database: "postgres",
-    host: "db.waauwzazgebvrxwefidt.supabase.co",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    host: process.env.DB_HOST,
     port: process.env.DB_PORT || 5432,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   }
-}
+};
