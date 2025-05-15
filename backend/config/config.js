@@ -11,7 +11,7 @@ module.exports = {
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false // For Supabase / cloud Postgres
+        rejectUnauthorized: false
       }
     }
   },
