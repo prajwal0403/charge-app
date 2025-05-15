@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../api/axios';
-import StationCard from '../components/ProductCard';
+import StationCard from '../components/StationCard';
 import MapView from '../components/MapView';
 
 const CustomerHome = () => {
@@ -84,7 +84,7 @@ const CustomerHome = () => {
         <button
           onClick={() => setViewMode('list')}
           className={`px-4 py-2 rounded-lg cursor-pointer ${
-            viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            viewMode === 'list' ? 'bg-gradient-to-r from-blue-600 to-red-500  text-white' : 'bg-gray-200'
           }`}
         >
           List View
@@ -92,7 +92,7 @@ const CustomerHome = () => {
         <button
           onClick={() => setViewMode('map')}
           className={`px-4 py-2 cursor-pointer rounded-lg ${
-            viewMode === 'map' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            viewMode === 'map' ? 'bg-gradient-to-r from-blue-600 to-red-500  text-white' : 'bg-gray-200'
           }`}
         >
           Map View

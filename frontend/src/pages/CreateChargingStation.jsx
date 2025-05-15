@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 const ChargingStationForm = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const { id } = useParams()
   const initialData = {
     name: '',
@@ -13,7 +14,7 @@ const ChargingStationForm = () => {
     longitude: '',
     status: 'Active',
     powerOutput: '',
-    connectorType: ''
+    connectorType: 'AC'
 };
 
 const [formData, setFormData] = useState(initialData);
@@ -45,6 +46,7 @@ const [formData, setFormData] = useState(initialData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       if (id) {
         // Edit product
@@ -53,7 +55,7 @@ const [formData, setFormData] = useState(initialData);
       latitude: parseFloat(formData.latitude),
       longitude: parseFloat(formData.longitude)
     });
-        toast.success('Product updated successfully!');
+        toast.success('Station updated successfully!');
       } else {
         // Create new product
         await api.post('/charging-stations', {
@@ -61,13 +63,15 @@ const [formData, setFormData] = useState(initialData);
       latitude: parseFloat(formData.latitude),
       longitude: parseFloat(formData.longitude)
     });
-        toast.success('Product created successfully!');
+        toast.success('Station created successfully!');
       }
 
       navigate('/admin-home'); // Redirect to admin home page
     } catch (err) {
       console.error('Error submitting form:', err);
       toast.error('Error submitting form');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -173,23 +177,31 @@ const [formData, setFormData] = useState(initialData);
           <label htmlFor="connectorType" className="block text-sm font-medium text-gray-700">
             Connector Type
           </label>
-          <input
-            type="text"
+          <select
             id="connectorType"
             name="connectorType"
             value={formData.connectorType}
             onChange={handleInputChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            required
-          />
+          >
+            <option value="AC">AC</option>
+            <option value="DC">DC</option>
+          </select>
         </div>
-
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition duration-300"
-        >
-          {id ? 'Update Station' : 'Create Station'}
-        </button>
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full flex justify-center items-center gap-2 cursor-pointer py-2 bg-gradient-to-r from-blue-600 to-red-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition duration-300 disabled:opacity-50"
+      >
+        {loading ? (
+          <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+        ) : (
+          id ? 'Update Station' : 'Create Station'
+        )}
+      </button>
       </form>
     </div>
   );

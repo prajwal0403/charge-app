@@ -13,6 +13,7 @@ const AdminHome = () => {
   const [powerFilter, setPowerFilter] = useState('');
   const [connectorFilter, setConnectorFilter] = useState('All');
   const [viewMode, setViewMode] = useState('list');
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     const fetchAdminStations = async () => {
@@ -25,12 +26,16 @@ const AdminHome = () => {
     };
 
     fetchAdminStations();
-  }, [user.email, user.id]);
+  }, [user.email, user.id, deleted]);
+
+  const toggleDeleted = () => {
+    setDeleted(!deleted);
+  }
 
   const handleDelete = async (stationId) => {
     try {
       await api.delete(`/charging-stations/${stationId}`);
-      setStations(stations.filter((station) => station.id !== stationId));
+      toggleDeleted();
       toast.success('Station deleted successfully!');
     } catch (err) {
       console.error('Failed to delete station', err);
@@ -100,7 +105,7 @@ const AdminHome = () => {
         <button
           onClick={() => setViewMode('list')}
           className={`px-4 py-2 rounded-lg cursor-pointer ${
-            viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            viewMode === 'list' ? 'bg-gradient-to-r from-blue-600 to-red-500  text-white' : 'bg-gray-200'
           }`}
         >
           List View
@@ -108,7 +113,7 @@ const AdminHome = () => {
         <button
           onClick={() => setViewMode('map')}
           className={`px-4 py-2 cursor-pointer rounded-lg ${
-            viewMode === 'map' ? 'bg-blue-600 text-white' : 'bg-gray-200'
+            viewMode === 'map' ? 'bg-gradient-to-r from-blue-600 to-red-500  text-white' : 'bg-gray-200'
           }`}
         >
           Map View
@@ -116,7 +121,7 @@ const AdminHome = () => {
       </div>
       <Link
         to="/create-station"
-        className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+        className="bg-gradient-to-r from-blue-600 to-red-500  text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
       >
         Add New Station
       </Link>

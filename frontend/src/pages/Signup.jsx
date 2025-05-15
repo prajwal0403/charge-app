@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -18,12 +18,15 @@ const Signup = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstname.trim()) newErrors.firstname = "First name is required";
+    if (!formData.firstname.trim())
+      newErrors.firstname = "First name is required";
     if (!formData.lastname.trim()) newErrors.lastname = "Last name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Invalid email";
+    else if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Invalid email";
     if (!formData.password.trim()) newErrors.password = "Password is required";
-    else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters";
+    else if (formData.password.length < 6)
+      newErrors.password = "Password must be at least 6 characters";
     if (!formData.role) newErrors.role = "Role is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -32,7 +35,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     if (!validate()) return;
-
+    setLoading(true);
     try {
       const res = await api.post("/auth/signup", formData);
       const { token, user } = res.data;
@@ -42,6 +45,8 @@ const Signup = () => {
       navigate("/login");
     } catch (err) {
       toast.error(err.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -66,7 +71,9 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.firstname && <p className="text-red-500 text-sm mt-1">{errors.firstname}</p>}
+          {errors.firstname && (
+            <p className="text-red-500 text-sm mt-1">{errors.firstname}</p>
+          )}
         </div>
 
         <div>
@@ -78,7 +85,9 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.lastname && <p className="text-red-500 text-sm mt-1">{errors.lastname}</p>}
+          {errors.lastname && (
+            <p className="text-red-500 text-sm mt-1">{errors.lastname}</p>
+          )}
         </div>
 
         <div>
@@ -90,7 +99,9 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+          )}
         </div>
 
         <div>
@@ -102,7 +113,9 @@ const Signup = () => {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+          )}
         </div>
 
         <div>
@@ -117,14 +130,40 @@ const Signup = () => {
             <option value="customer">User</option>
             <option value="admin">Admin</option>
           </select>
-          {errors.role && <p className="text-red-500 text-sm mt-1">{errors.role}</p>}
+          {errors.role && (
+            <p className="text-red-500 text-sm mt-1">{errors.role}</p>
+          )}
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-3 rounded-md font-medium hover:bg-blue-700 transition duration-200"
+          disabled={loading}
+          className="w-full flex justify-center items-center gap-2 cursor-pointer py-2 bg-gradient-to-r from-blue-600 to-red-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none transition duration-300 disabled:opacity-50"
         >
-          Sign Up
+          {loading ? (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
     </div>

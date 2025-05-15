@@ -8,8 +8,8 @@ import Signup from './pages/Signup';
 import AdminHome from './pages/AdminHome';
 import CustomerHome from './pages/Home';
 import PrivateRoute from '../PrivateRoutes';
-import ChargingStationForm from './pages/CreateProduct';
-import StationDetails from './pages/ProductDetails';
+import ChargingStationForm from './pages/CreateChargingStation';
+import StationDetails from './pages/StationDetails';
 
 export default function App() {
   return (
