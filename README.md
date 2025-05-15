@@ -1,4 +1,4 @@
-# Mobile Store App
+# Charge App
 
 This is a full-stack web application for managing and displaying charging stations. It includes user authentication, station CRUD operations for admins, and a UI built with React and Tailwind CSS.
 
@@ -6,16 +6,16 @@ This is a full-stack web application for managing and displaying charging statio
 
 ## 🛠 Tech Stack
 
-- **Frontend:** React, Tailwind CSS, Vite, Redux
-- **Backend:** Node.js, Express, Sequelize, PostgreSQL
-- **Authentication:** JWT
+* **Frontend:** React, Tailwind CSS, Vite, Redux
+* **Backend:** Node.js, Express, Sequelize, PostgreSQL
+* **Authentication:** JWT
 
 ---
 
 ## 📁 Project Structure
 
 ```
-mobile-store/
+charge-app/
 ├── backend/
 └── frontend/
 ```
@@ -83,15 +83,21 @@ mobile-store/
 
 ---
 
+## 🌐 Deployment
+
+* **Backend:** Deployed on Render → [https://charge-app.onrender.com](https://charge-app.onrender.com)
+* **Frontend:** Deployed on Vercel → [https://charge-app-sable.vercel.app](https://charge-app-sable.vercel.app), [https://charge-app-rautprajwal546gmailcoms-projects.vercel.app](https://charge-app-rautprajwal546gmailcoms-projects.vercel.app)
+
+---
+
 ## 📌 Notes
 
-- Default admin routes require a user with role `"admin"`.
-- Stations created by an admin will be filtered accordingly.
-- All stations can be viewed using the `/all` route.
+* Default admin routes require a user with role `"admin"`.
+* Stations created by an admin will be filtered accordingly.
+* All stations can be viewed using the `/all` route.
 
 ---
 
 ## 📜 License
 
 This project is licensed for educational purposes.
-
