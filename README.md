@@ -12,6 +12,23 @@ This is a full-stack web application for managing and displaying charging statio
 
 ---
 
+## ✨ Features
+
+* JWT authentication
+* Sign up as Admin or User
+* Login & Logout functionality
+* Separate views for Admin and User
+* Users can only view available charging stations
+* Admins can perform full CRUD operations on stations
+* Interactive Map view using Leaflet
+* Filtering options based on:
+
+  * Status (available/occupied)
+  * Power Output
+  * Connector Type
+
+---
+
 ## 📁 Project Structure
 
 ```
