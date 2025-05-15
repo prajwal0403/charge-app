@@ -15,8 +15,13 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(express.json());
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://charge-app-sable.vercel.app', 'https://charge-app-git-main-rautprajwal546gmailcoms-projects.vercel.app', 'https://charge-4t4jn0xeb-rautprajwal546gmailcoms-projects.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: allowedOrigins,
   credentials: true
 }));
 
