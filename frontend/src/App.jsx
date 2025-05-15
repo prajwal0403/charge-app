@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 // import './index.css';
-import './app.css';
+import './App.css';
 import { Toaster } from 'react-hot-toast';
 import Signup from './pages/Signup';
 import AdminHome from './pages/AdminHome';
