@@ -1,6 +1,6 @@
 # Mobile Store App
 
-This is a full-stack web application for managing and displaying products in a mobile store. It includes user authentication, product CRUD operations for admins, and a UI built with React and Tailwind CSS.
+This is a full-stack web application for managing and displaying charging stations. It includes user authentication, station CRUD operations for admins, and a UI built with React and Tailwind CSS.
 
 ---
 
@@ -55,7 +55,7 @@ mobile-store/
    npm run dev
    ```
 
-> Ensure PostgreSQL is running and a database named `mobile_store` exists.
+> Ensure PostgreSQL is running and a database named `charge-app` exists.
 
 ---
 
@@ -86,8 +86,8 @@ mobile-store/
 ## 📌 Notes
 
 - Default admin routes require a user with role `"admin"`.
-- Products created by an admin will be filtered accordingly.
-- All products can be viewed using the `/all` route.
+- Stations created by an admin will be filtered accordingly.
+- All stations can be viewed using the `/all` route.
 
 ---
 
